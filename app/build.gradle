@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def releasePropertiesFile = rootProject.file("signinconfig.properties")
+def releaseProperties = new Properties()
+releaseProperties.load(new FileInputStream(releasePropertiesFile))
+
+android {
+    compileSdkVersion 33
+    signingConfigs {
+        release {
+            storeFile file(releaseProperties["filePath"])
+            keyAlias = releaseProperties["key"]
+            storePassword releaseProperties["password"]
+            keyPassword releaseProperties["password"]
+        }
+    }
+    defaultConfig {
+        applicationId "com.mindinventory.linkedinsample"
+        minSdkVersion 16
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    api project(':linkedinlogin')
+
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LinkedInSample</string>
+    <string name="client_id"> 86onvxm83qulwh</string>
+    <string name="client_secret">XpDNxQ3NuJH04Tms</string>
+    <string name="redirect_uri">https://www.linkedin.com/company/99074691/admin/feed/posts/?feedType=following</string>
+    <string name="state_value">email</string>
+</resources>

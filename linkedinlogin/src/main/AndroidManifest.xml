@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="com.jagadesh.linkedinlogin">
+    <application>
+        <activity android:name="com.jagadesh.linkedinlogin.presentation.MiLinkedInActivity"
+                android:exported="true"
+                android:theme="@style/AppThemeTransparent">
+        </activity>
+    </application>
+</manifest>
